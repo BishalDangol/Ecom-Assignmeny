@@ -1,38 +1,42 @@
 using System;
+using System.Collections.Generic;
 
-namespace Saja.Entities
+namespace serena.Entities
 {
-    /// <summary>
-    /// Represents a customer order.
-    /// </summary>
     public class Order
     {
-        public int OrderId { get; set; }
-        public int MemberId { get; set; }
+        public int Id { get; set; }
         public string OrderCode { get; set; }
-        public DateTime OrderDate { get; set; }
+        public int MemberId { get; set; }
+        public string ShipName { get; set; }
+        public string ShipPhone { get; set; }
         public string Status { get; set; }
-        public int PaymentMethodId { get; set; }
-        public int? CouponId { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal DiscountAmount { get; set; }
-        public decimal DeliveryCharge { get; set; }
+        public int TotalQty { get; set; }
         public decimal TotalAmount { get; set; }
-        public string PaymentStatus { get; set; }
+        public string Payment { get; set; }
+        public DateTime OrderDate { get; set; }
         public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
-        public Order() { }
+        // Navigation property
+        public List<OrderItem> Items { get; set; }
 
-        public Order(int orderId, string orderCode, decimal totalAmount)
+        public Order() 
         {
-            OrderId = orderId;
-            OrderCode = orderCode;
-            TotalAmount = totalAmount;
+            Items = new List<OrderItem>();
         }
+    }
 
-        public override string ToString()
-        {
-            return $"Order: {OrderCode} (ID: {OrderId}, Total: NPR {TotalAmount})";
-        }
+    public class OrderItem
+    {
+        public int Id { get; set; }
+        public int OrderId { get; set; }
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
+        public decimal Amount { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
+        public OrderItem() { }
     }
 }

@@ -2,131 +2,56 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Saja.Entities;
-using Saja.Utilities;
+using serena.Entities;
 
-namespace Saja.DAL
+namespace serena.DAL
 {
-    /// <summary>
-    /// Handles database operations for Members (Customers).
-    /// </summary>
     public class MemberDAL
     {
         public Member GetByUsername(string username)
         {
-            Member member = null;
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
-            {
-                string query = "SELECT * FROM members WHERE username = @Username";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Username", username);
-                try
-                {
-                    DatabaseHelper.OpenConnection(conn);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            member = MapToEntity(reader);
-                        }
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    throw new Exception("Error retrieving member by username", ex);
-                }
-            }
-            return member;
+            string sql = "SELECT * FROM members WHERE username = @u";
+            DataTable dt = Db.Query(sql, Db.P("u", username));
+            if (dt.Rows.Count > 0) return MapRow(dt.Rows[0]);
+            return null;
         }
 
-        public Member GetById(int memberId)
+        public Member GetById(int id)
         {
-            Member member = null;
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
-            {
-                string query = "SELECT * FROM members WHERE member_id = @Id";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Id", memberId);
-                try
-                {
-                    DatabaseHelper.OpenConnection(conn);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            member = MapToEntity(reader);
-                        }
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    throw new Exception("Error retrieving member by ID", ex);
-                }
-            }
-            return member;
+            string sql = "SELECT * FROM members WHERE id = @id";
+            DataTable dt = Db.Query(sql, Db.P("id", id));
+            if (dt.Rows.Count > 0) return MapRow(dt.Rows[0]);
+            return null;
         }
 
-        public int Insert(Member member)
+        public int Insert(Member m)
         {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
-            {
-                string query = @"INSERT INTO members (username, email, password, full_name, phone, created_at) 
-                                VALUES (@Username, @Email, @Password, @FullName, @Phone, @CreatedAt);
-                                SELECT SCOPE_IDENTITY();";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Username", member.Username);
-                cmd.Parameters.AddWithValue("@Email", member.Email);
-                cmd.Parameters.AddWithValue("@Password", member.Password);
-                cmd.Parameters.AddWithValue("@FullName", member.FullName);
-                cmd.Parameters.AddWithValue("@Phone", member.Phone);
-                cmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
+            string sql = @"
+                INSERT INTO members (full_name, username, email, password, phone)
+                VALUES (@fn, @u, @e, @p, @ph);
+                SELECT SCOPE_IDENTITY();";
 
-                try
-                {
-                    DatabaseHelper.OpenConnection(conn);
-                    return Convert.ToInt32(cmd.ExecuteScalar());
-                }
-                catch (SqlException ex)
-                {
-                    throw new Exception("Error registering member", ex);
-                }
-            }
+            return Convert.ToInt32(Db.Scalar<object>(sql, 
+                Db.P("fn", m.FullName),
+                Db.P("u", m.Username),
+                Db.P("e", m.Email),
+                Db.P("p", m.Password),
+                Db.P("ph", m.Phone)
+            ));
         }
 
-        public bool UpdateToken(int memberId, string token, DateTime? expires)
-        {
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
-            {
-                string query = "UPDATE members SET persistent_token = @Token, token_expires = @Expires WHERE member_id = @Id";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Token", (object)token ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@Expires", (object)expires ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@Id", memberId);
-                try
-                {
-                    DatabaseHelper.OpenConnection(conn);
-                    return cmd.ExecuteNonQuery() > 0;
-                }
-                catch (SqlException ex)
-                {
-                    throw new Exception("Error updating member token", ex);
-                }
-            }
-        }
-
-        private Member MapToEntity(SqlDataReader reader)
+        private Member MapRow(DataRow row)
         {
             return new Member
             {
-                MemberId = Convert.ToInt32(reader["member_id"]),
-                Username = reader["username"].ToString(),
-                Email = reader["email"].ToString(),
-                Password = reader["password"].ToString(),
-                FullName = reader["full_name"].ToString(),
-                Phone = reader["phone"].ToString(),
-                CreatedAt = Convert.ToDateTime(reader["created_at"]),
-                PersistentToken = reader["persistent_token"].ToString(),
-                TokenExpires = reader["token_expires"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["token_expires"])
+                Id = Convert.ToInt32(row["id"]),
+                FullName = Convert.ToString(row["full_name"]),
+                Username = Convert.ToString(row["username"]),
+                Email = Convert.ToString(row["email"]),
+                Password = Convert.ToString(row["password"]),
+                Phone = Convert.ToString(row["phone"]),
+                CreatedAt = Convert.ToDateTime(row["created_at"]),
+                UpdatedAt = Convert.ToDateTime(row["updated_at"])
             };
         }
     }

@@ -1,16 +1,21 @@
-# Exclude solution files as requested
-*.sln
-*.slnx
-
-# Visual Studio files
+# Visual Studio
 .vs/
-[Bb]in/
-[Oo]bj/
+.root
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
 
-# Database files
-App_Data/*.mdf
+# Database logs
 App_Data/*.ldf
+App_Data/errors.log
+
+# Temporary/Cache
+bin/
+obj/
+_ReSharper*/
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini

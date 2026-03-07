@@ -1,77 +1,44 @@
-using System;
 using System.Collections.Generic;
-using Saja.DAL;
-using Saja.Entities;
+using serena.Entities;
+using serena.DAL;
 
-namespace Saja.BLL
+namespace serena.BLL
 {
-    /// <summary>
-    /// Implements business rules for Products.
-    /// </summary>
     public class ProductBLL
     {
-        private ProductDAL productDAL;
-        private VendorDAL vendorDAL;
+        private ProductDAL _dal = new ProductDAL();
 
-        public ProductBLL()
+        public List<Product> GetNewArrivals(int limit = 8)
         {
-            productDAL = new ProductDAL();
-            vendorDAL = new VendorDAL();
+            return _dal.GetNewArrivals(limit);
         }
 
-        public List<Product> GetAllProducts()
+        public List<Product> GetTopPicks(int limit = 8)
         {
-            return productDAL.GetAll();
+            return _dal.GetTopPicks(limit);
         }
 
-        public Product GetProductById(int id)
+        public List<Product> GetProductsByIds(List<int> ids)
+        {
+            return _dal.GetByIds(ids);
+        }
+
+        public Product GetProductBySlug(string slug)
+        {
+            if (string.IsNullOrEmpty(slug)) return null;
+            return _dal.GetBySlug(slug);
+        }
+
+        public Product GetProduct(int id)
         {
             if (id <= 0) return null;
-            return productDAL.GetById(id);
+            return _dal.GetById(id);
         }
 
-        public List<Product> SearchProducts(string keyword, int? categoryId, decimal? minPrice, decimal? maxPrice)
+        public bool IsInStock(int productId, int quantityRequested)
         {
-            return productDAL.Search(keyword, categoryId, minPrice, maxPrice);
-        }
-
-        /// <summary>
-        /// Adds a new product with business validation and vendor verification check.
-        /// </summary>
-        public OperationResult AddProduct(Product product)
-        {
-            // Validation
-            if (string.IsNullOrWhiteSpace(product.Name))
-                return OperationResult.Failed("Product name is required.");
-            
-            if (product.Price <= 0)
-                return OperationResult.Failed("Price must be greater than zero.");
-
-            if (product.Stock < 0)
-                return OperationResult.Failed("Initial stock cannot be negative.");
-
-            // Nepal Market Rule: Check if Vendor is verified
-            Vendor vendor = vendorDAL.GetById(product.VendorId);
-            if (vendor == null)
-                return OperationResult.Failed("Invalid Vendor.");
-            
-            if (!vendor.Verified)
-                return OperationResult.Failed("Vendor must be verified before listing products.");
-
-            int newId = productDAL.Insert(product);
-            if (newId > 0)
-                return OperationResult.Succeeded("Product added successfully.", newId);
-            
-            return OperationResult.Failed("Could not save product to database.");
-        }
-
-        /// <summary>
-        /// Checks if enough stock is available.
-        /// </summary>
-        public bool IsStockAvailable(int productId, int requestedQuantity)
-        {
-            Product p = productDAL.GetById(productId);
-            return p != null && p.Stock >= requestedQuantity;
+            var p = GetProduct(productId);
+            return p != null && p.Stock >= quantityRequested;
         }
     }
 }

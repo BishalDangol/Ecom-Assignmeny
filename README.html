@@ -1,0 +1,307 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Serena – README</title>
+    <style>
+        :root {
+            --ink: #1f2937;
+            --muted: #6b7280;
+            --line: #e5e7eb;
+            --accent: #2563eb;
+            --bg: #ffffff;
+            --badge: #111827;
+            --badge-bg: #f3f4f6;
+            --ok: #065f46;
+            --okbg: #ecfdf5;
+            --warn: #7f1d1d;
+            --warnbg: #fef2f2;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 40px auto;
+            padding: 0 20px 60px
+        }
+
+        h1 {
+            font-size: 34px;
+            line-height: 1.15;
+            margin: 0 0 6px
+        }
+
+        h2 {
+            margin: 34px 0 12px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 6px
+        }
+
+        h3 {
+            margin: 22px 0 8px
+        }
+
+        p, li {
+            color: var(--ink)
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        code, .kbd {
+            background: #f8fafc;
+            border: 1px solid var(--line);
+            padding: .1rem .35rem;
+            border-radius: 6px;
+            font-family: ui-monospace,SFMono-Regular,Consolas,Monaco,monospace;
+            font-size: .95em
+        }
+
+        pre {
+            background: #0b1020;
+            color: #d1e7ff;
+            border-radius: 10px;
+            padding: 14px 16px;
+            overflow: auto;
+            border: 1px solid #0b1020;
+            margin: 12px 0
+        }
+
+            pre code {
+                background: transparent;
+                border: 0;
+                padding: 0;
+                color: inherit
+            }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--badge-bg);
+            color: var(--badge);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: .25rem .6rem;
+            font-size: .85rem
+        }
+
+        .toc a {
+            color: var(--accent);
+            text-decoration: none
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin: 10px 0;
+            background: #fff
+        }
+
+        .mono {
+            font-family: ui-monospace,SFMono-Regular,Consolas,monospace
+        }
+
+        ul.tight > li {
+            margin: .25rem 0
+        }
+
+        .alert {
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin: 12px 0
+        }
+
+        .alert-ok {
+            background: var(--okbg);
+            color: var(--ok);
+            border: 1px solid #10b98133
+        }
+
+        .alert-warn {
+            background: var(--warnbg);
+            color: var(--warn);
+            border: 1px solid #ef444433
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+
+        <h1>Serena</h1>
+        <p class="muted">ASP.NET Web Forms (C# 5) e-commerce demo • Admin + Account • SQL Server</p>
+
+        <p class="badge">Root → <span class="mono">/serena</span></p>
+
+        <div class="toc card">
+            <strong>Contents</strong>
+            <ul class="tight">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#stack">Tech Stack</a></li>
+                <li><a href="#structure">Folder Structure</a></li>
+                <li><a href="#quickstart">Quick Start (No Login)</a></li>
+                <li><a href="#migrations">Migrations</a></li>
+                <li><a href="#seeder">Seeder (Sample Data)</a></li>
+                <li><a href="#features">Key Features</a></li>
+                <li><a href="#reports">Reports &amp; Printing</a></li>
+                <li><a href="#config">Configuration</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+            </ul>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>
+            Serena is a compact Web Forms store: catalog, cart/checkout (Account), and an Admin panel for products, categories,
+            members, orders, feedbacks, payment methods, and reports. SQL Server backs the data; ADO.NET with a tiny <code>Db</code> helper handles queries.
+        </p>
+
+        <h2 id="stack">Tech Stack</h2>
+        <ul class="tight">
+            <li><strong>.NET Framework:</strong> 4.5+ (C# 5)</li>
+            <li><strong>ASP.NET Web Forms</strong> with master pages (<code>MasterPages/Admin.master</code>, <code>MasterPages/Site.master</code>)</li>
+            <li><strong>SQL Server</strong> / LocalDB • ADO.NET (<code>App_Code/Data/Db.cs</code>)</li>
+            <li><strong>Bootstrap-style</strong> UI via site CSS</li>
+        </ul>
+
+        <h2 id="structure">Folder Structure</h2>
+        <div class="card">
+            <div class="grid">
+                <div>
+                    <ul class="tight">
+                        <li><strong>Account/</strong> — Login/Register/Profile/Orders/Checkout</li>
+                        <li><strong>Admin/</strong> — Dashboard, Products, Categories, Members, Orders, OrderView, Feedbacks, PaymentMethods, Reports</li>
+                        <li><strong>Admin/ReportProduct.aspx</strong> — printable Product Stock Report</li>
+                        <li><strong>Admin/ReportOrder.aspx</strong> — printable Delivered Orders Revenue Report</li>
+                        <li><strong>Setup.aspx</strong> — public first-run page (migrate + seed, protected by SetupKey)</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="tight">
+                        <li><strong>App_Code/Data/Db.cs</strong> — DB helper</li>
+                        <li><strong>App_Code/Data/Migrator.cs</strong> — migration runner (tracks <code>schema_migrations</code>)</li>
+                        <li><strong>App_Data/Serena.mdf</strong> — LocalDB (optional)</li>
+                        <li><strong>Assets/images/products/</strong> — uploaded product images</li>
+                        <li><strong>Web.config</strong>, <strong>Global.asax</strong>, <strong>Error.aspx</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2 id="quickstart">Quick Start (No Login)</h2>
+        <div class="alert alert-ok"><strong>First-run setup requires no admin login.</strong> Use <code>Setup.aspx</code> with a one-time key.</div>
+        <ol>
+            <li>
+                <strong>Configure DB</strong> in <code>Web.config</code>:
+<pre><code>&lt;connectionStrings&gt;
+  &lt;add name="DefaultConnection"
+       connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Serena.mdf;Integrated Security=True"
+       providerName="System.Data.SqlClient" /&gt;
+&lt;/connectionStrings&gt;</code></pre>
+            </li>
+            <li>
+                <strong>Add a SetupKey</strong> (change the value):
+<pre><code>&lt;appSettings&gt;
+  &lt;add key="SetupKey" value="9C4F9E3B-7AD1-4E6D-AD13-6B9B1DB6F5E8" /&gt;
+&lt;/appSettings&gt;</code></pre>
+            </li>
+            <li>
+                <strong>Run setup</strong> (no login):
+<pre><code>http://localhost:&lt;port&gt;/Setup.aspx?k=9C4F9E3B-7AD1-4E6D-AD13-6B9B1DB6F5E8</code></pre>
+                Click <em>Run Migrations</em> then <em>Seed Sample Data</em> (or <em>Run Both</em>).
+            </li>
+            <li><strong>Secure/Remove</strong> <code>Setup.aspx</code> after initializing (rotate or delete the key).</li>
+        </ol>
+
+        <h2 id="migrations">Migrations</h2>
+        <p>
+            Migrations are code-driven via <code>App_Code/Data/Migrator.cs</code>. They create all tables, constraints, and helpful indexes
+            and record the applied version in <code>dbo.schema_migrations</code>. Re-running is safe (guards check existence).
+        </p>
+        <ul class="tight">
+            <li>Tables: <code>admins</code>, <code>members</code>, <code>member_addresses</code>, <code>categories</code>, <code>products</code>, <code>payment_methods</code>, <code>orders</code>, <code>order_items</code>, <code>order_addresses</code>, <code>order_logs</code>, <code>feedbacks</code></li>
+            <li>Indexes: <code>UQ_admins_username</code>, <code>UQ_members_username</code>, <code>UQ_members_email</code>, <code>UQ_payment_methods_name</code>, <code>UQ_orders_order_code</code>, <code>IX_orders_status_date(status, order_date)</code></li>
+            <li>Constraints: FKs across products/categories, orders/members, items/orders/products, addresses/orders, logs/(orders, admins)</li>
+            <li>Payment method CHECK: name ∈ <code>{'Cash On Delivery','Card','Bank'}</code></li>
+        </ul>
+
+        <h2 id="seeder">Seeder (Sample Data)</h2>
+        <p>
+            The seeder inserts an admin, a handful of categories, several demo products, and payment methods.
+            It’s <strong>idempotent</strong> — safe to run multiple times.
+        </p>
+        <ul class="tight">
+            <li><strong>Admin</strong>: <code>admin</code> / <code>P@ssw0rd!</code> (stored as SHA-256 hex)</li>
+            <li><strong>Categories</strong>: Postcards &amp; Stationery, Magnets, T-Shirts &amp; Apparel, Mugs &amp; Drinkware, Keychains</li>
+            <li><strong>Payment Methods</strong>: Cash On Delivery, Card, Bank</li>
+            <li><strong>Products</strong>: various with price/stock; images optional under <code>Assets/images/products/</code></li>
+        </ul>
+        <p class="muted">Prefer SQL? You can manually run the INSERTs; the app’s seeder does the same with existence checks.</p>
+
+        <h2 id="features">Key Features</h2>
+        <ul>
+            <li><strong>Admin › Products</strong>: CRUD, image upload, filters (name/category/visibility/sort), pagination, total count</li>
+            <li><strong>Admin › Categories</strong>: CRUD; prevents delete if referenced by products</li>
+            <li><strong>Admin › Members</strong>: list with full-name filter + date range, totals, pagination</li>
+            <li><strong>Admin › Orders</strong>: status tabs (PENDING/ACCEPTED/DELIVERING/DELIVERED/CANCELED), counts, filters (code, customer, date range), pagination</li>
+            <li><strong>OrderView</strong>: allowed transitions only (pending→accepted→delivering→delivered; cancel only from pending). DB stores lowercase; UI shows uppercase. Cancel returns stock to inventory. Includes items, address, logs.</li>
+            <li><strong>Feedbacks</strong>: pending/complete tabs; admin reply marks resolved</li>
+            <li><strong>Reports</strong>: inline data + hidden-iframe print templates</li>
+        </ul>
+
+        <h2 id="reports">Reports &amp; Printing</h2>
+        <p>
+            <strong>Admin/Reports.aspx</strong> shows controls and data inline. Clicking <em>Print</em> loads a hidden iframe:
+        </p>
+        <ul class="tight">
+            <li><strong>Admin/ReportProduct.aspx</strong> — Product Stock Report</li>
+            <li><strong>Admin/ReportOrder.aspx</strong> — Delivered Orders Revenue Report (by date range/month/year)</li>
+        </ul>
+        <p>
+            Templates auto-invoke <code>window.print()</code> and use a <code>.print-area</code> CSS to print only the report (Admin chrome hidden).
+        </p>
+
+        <h2 id="config">Configuration</h2>
+        <h3>Connection string</h3>
+<pre><code>&lt;connectionStrings&gt;
+  &lt;add name="DefaultConnection"
+       connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Serena.mdf;Integrated Security=True"
+       providerName="System.Data.SqlClient" /&gt;
+&lt;/connectionStrings&gt;</code></pre>
+
+        <h3>Setup key (first-run)</h3>
+<pre><code>&lt;appSettings&gt;
+  &lt;add key="SetupKey" value="9C4F9E3B-7AD1-4E6D-AD13-6B9B1DB6F5E8" /&gt;
+&lt;/appSettings&gt;</code></pre>
+
+        <div class="alert alert-warn"><strong>Security:</strong> rotate/remove the SetupKey and/or delete <code>Setup.aspx</code> after initialization. Ensure <code>compilation debug="false"</code> in production.</div>
+
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <ul>
+            <li><strong>Login works once, then fails after recycle</strong>: ensure <code>admins.persistent_token</code> and <code>token_expires</code> columns exist (migrations add them) and cookies aren’t blocked.</li>
+            <li><strong>Print shows sidebar</strong>: confirm report templates include the <code>.print-area</code> CSS and are loaded in the hidden iframe (from Admin/Reports).</li>
+            <li><strong>SQL permission errors</strong>: the DB user must be able to CREATE TABLE/INDEX/CONSTRAINT for migrations.</li>
+            <li><strong>Payment methods constraint</strong>: values must be exactly <code>Cash On Delivery</code>, <code>Card</code>, or <code>Bank</code>.</li>
+            <li><strong>Images</strong>: store relative paths like <code>Assets/images/products/filename.jpg</code>; directory must be writable.</li>
+        </ul>
+
+        <p class="muted">© <span id="yr"></span> Serena Demo</p>
+    </div>
+    <script>document.getElementById('yr').textContent = (new Date).getFullYear();</script>
+</body>
+</html>
