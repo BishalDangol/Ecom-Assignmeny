@@ -1,0 +1,16 @@
+# Exclude solution files as requested
+*.sln
+*.slnx
+
+# Visual Studio files
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Database files
+App_Data/*.mdf
+App_Data/*.ldf

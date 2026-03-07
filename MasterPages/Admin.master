@@ -1,0 +1,143 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="serena.AdminMaster" %>
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-50">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server"></asp:ContentPlaceHolder>
+    </title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" />
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B7355',
+                        secondary: '#F5F5DC',
+                        accent: '#D4AF37',
+                        'text-dark': '#333333',
+                        'off-white': '#FAF9F6',
+                        'admin-bg': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Local CSS -->
+    <link runat="server" rel="stylesheet" href="~/Assets/css/custom.css" />
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body class="h-full font-sans text-text-dark antialiased">
+    <form runat="server" class="h-full">
+        
+        <!-- Mobile Sidebar Overlay -->
+        <div id="mobileOverlay" class="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 hidden lg:hidden"></div>
+
+        <!-- Sidebar (Desktop) -->
+        <div class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col shadow-2xl z-50">
+            <div class="flex flex-col flex-grow bg-admin-bg pt-8 overflow-y-auto">
+                <div class="flex items-center flex-shrink-0 px-8 mb-12">
+                    <a runat="server" href="~/Admin/Dashboard.aspx" class="text-3xl font-serif text-white tracking-tighter">
+                        Saja<span class="text-primary">.</span>
+                    </a>
+                </div>
+                <nav class="flex-1 px-4 space-y-1">
+                    <a id="navDashboard" runat="server" href="~/Admin/Dashboard.aspx" class="group flex items-center px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-gauge-high w-8 text-sm group-hover:text-primary transition-colors"></i>
+                        Dashboard
+                    </a>
+                    <a id="navCategories" runat="server" href="~/Admin/Categories.aspx" class="group flex items-center px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-tags w-8 text-sm group-hover:text-primary transition-colors"></i>
+                        Categories
+                    </a>
+                    <a id="navProducts" runat="server" href="~/Admin/Products.aspx" class="group flex items-center px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-box w-8 text-sm group-hover:text-primary transition-colors"></i>
+                        Products
+                    </a>
+                    <a id="navOrders" runat="server" href="~/Admin/Orders.aspx" class="group flex items-center px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-receipt w-8 text-sm group-hover:text-primary transition-colors"></i>
+                        Orders
+                    </a>
+                    <a id="navPaymentMethods" runat="server" href="~/Admin/PaymentMethods.aspx" class="group flex items-center px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-credit-card w-8 text-sm group-hover:text-primary transition-colors"></i>
+                        Payments
+                    </a>
+                    <a id="navFeedbacks" runat="server" href="~/Admin/Feedbacks.aspx" class="group flex items-center px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        <i class="fa-regular fa-comments w-8 text-sm group-hover:text-primary transition-colors"></i>
+                        Feedbacks
+                    </a>
+                    <a id="navMembers" runat="server" href="~/Admin/Members.aspx" class="group flex items-center px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-users w-8 text-sm group-hover:text-primary transition-colors"></i>
+                        Members
+                    </a>
+                    <a id="navReports" runat="server" href="~/Admin/Reports.aspx" class="group flex items-center px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-chart-line w-8 text-sm group-hover:text-primary transition-colors"></i>
+                        Reports
+                    </a>
+                </nav>
+                <div class="p-6 border-t border-white/5">
+                    <a id="navProfile" runat="server" href="~/Admin/Profile.aspx" class="flex items-center gap-4 px-4 py-4 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white group transition-all">
+                        <i class="fa-solid fa-user-gear text-sm group-hover:text-primary"></i>
+                        Settings
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="lg:pl-72 flex flex-col flex-1 h-full min-h-screen">
+            
+            <!-- Top Bar -->
+            <header class="sticky top-0 z-40 flex h-20 flex-shrink-0 bg-white shadow-sm lg:static lg:shadow-none border-b border-gray-100">
+                <button type="button" class="px-4 text-gray-500 border-r border-gray-200 lg:hidden focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+                <div class="flex-1 flex justify-between px-4 sm:px-6 lg:px-8">
+                    <div class="flex-1 flex items-center">
+                        <h1 class="text-xs uppercase tracking-[0.2em] font-bold text-gray-400">System Dashboard</h1>
+                    </div>
+                    <div class="ml-4 flex items-center md:ml-6 gap-6">
+                        <div class="text-right hidden sm:block">
+                            <div class="text-xs font-bold text-text-dark"><asp:Literal ID="litDisplayName" runat="server" /></div>
+                            <div class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Administrator</div>
+                        </div>
+                        <asp:LinkButton ID="btnLogout" runat="server" CssClass="text-gray-400 hover:text-red-500 transition-colors" OnClick="btnLogout_Click">
+                            <i class="fa-solid fa-power-off text-lg"></i>
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Scrollable Content -->
+            <main class="flex-1 bg-gray-50/50 p-6 sm:p-8 lg:p-12">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            </main>
+
+            <!-- Copyright -->
+            <footer class="py-6 px-8 text-center bg-white border-t border-gray-100 mt-auto">
+                <p class="text-[10px] uppercase tracking-widest text-gray-300 font-bold">&copy; 2024 Saja Furniture Studio. Admin Access Only.</p>
+            </footer>
+        </div>
+    </form>
+
+    <script>
+        // Simple mobile toggle
+        const overlay = document.getElementById('mobileOverlay');
+        const sidebar = document.querySelector('div.lg\\:flex-col');
+        // Add listeners for mobile interaction if needed
+    </script>
+</body>
+</html>
