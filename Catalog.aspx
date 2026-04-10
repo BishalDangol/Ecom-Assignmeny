@@ -1,15 +1,15 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPages/Site.master"
+<%@ Page Language="C#" MasterPageFile="~/MasterPages/Site.master"
     AutoEventWireup="true" CodeFile="Catalog.aspx.cs"
     Inherits="serena.Site.CatalogPage" %>
 
-<asp:Content ID="t" ContentPlaceHolderID="TitleContent" runat="server">Shop Our Collection | Saja</asp:Content>
+<asp:Content ID="t" ContentPlaceHolderID="TitleContent" runat="server">Shop Gadgets | eGadgetHub</asp:Content>
 
 <asp:Content ID="m" ContentPlaceHolderID="MainContent" runat="server">
     
     <!-- Hero Header for Catalog -->
     <section class="bg-off-white py-12 mb-12">
         <div class="container mx-auto px-4 lg:px-8">
-            <h1 class="text-4xl font-serif mb-2">Shop Collection</h1>
+            <h1 class="text-4xl font-bold mb-2">Shop Gadgets</h1>
             <nav class="flex text-xs uppercase tracking-widest text-gray-400">
                 <a runat="server" href="~/Default.aspx" class="hover:text-primary transition-colors">Home</a>
                 <span class="mx-2">/</span>
@@ -75,7 +75,7 @@
                     OnItemCommand="lvProducts_ItemCommand"
                     OnPagePropertiesChanging="lvProducts_PagePropertiesChanging">
                     <LayoutTemplate>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
                             <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
                         </div>
                     </LayoutTemplate>

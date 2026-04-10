@@ -6,10 +6,6 @@
 *.userosscache
 *.sln.docstates
 
-# Database logs
-App_Data/*.ldf
-App_Data/errors.log
-
 # Temporary/Cache
 bin/
 obj/

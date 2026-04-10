@@ -1,27 +1,38 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPages/Site.master"
+<%@ Page Language="C#" MasterPageFile="~/MasterPages/Site.master"
     AutoEventWireup="true" CodeFile="Default.aspx.cs"
     Inherits="serena.Site.HomePage" %>
 
-<asp:Content ID="t" ContentPlaceHolderID="TitleContent" runat="server">Saja | Modern Furniture Store</asp:Content>
+<asp:Content ID="t" ContentPlaceHolderID="TitleContent" runat="server">eGadgetHub | Premium Electronics Store</asp:Content>
 
 <asp:Content ID="m" ContentPlaceHolderID="MainContent" runat="server">
 
     <!-- Hero Section -->
     <section class="relative h-[80vh] overflow-hidden">
         <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover" alt="Modern Furniture" />
-            <div class="absolute inset-0 bg-black/20"></div>
+            <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover" alt="Latest Electronics" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
         </div>
         <div class="relative container mx-auto px-4 lg:px-8 h-full flex items-center">
             <div class="max-w-2xl animate-fade-in">
-                <span class="text-white text-xs uppercase tracking-[0.3em] font-bold mb-4 block">New Collection 2026</span>
-                <h1 class="text-white text-5xl md:text-7xl font-serif mb-8 leading-tight">Artistic Furniture for Your Sanctuary</h1>
+                <span class="text-blue-400 text-xs uppercase tracking-[0.3em] font-bold mb-4 block">New Technology 2026</span>
+                <h1 class="text-white text-5xl md:text-7xl font-bold mb-8 leading-tight">Elevate Your Digital Life</h1>
                 <p class="text-white/90 text-lg mb-10 leading-relaxed max-w-lg">
-                    Discover our curated selection of handcrafted pieces that bring soul and character to every corner of your home.
+                    Discover our curated selection of high-performance gadgets, from the latest smartphones to powerful computing solutions.
                 </p>
+                
+                <!-- Hero Search Bar -->
+                <div class="relative max-w-lg mb-10">
+                    <div class="flex bg-white rounded-full overflow-hidden shadow-2xl p-1">
+                        <input type="text" id="heroSearch" name="q" placeholder="Search for gadgets, accessories..." class="w-full px-6 py-4 text-sm focus:outline-none" />
+                        <button type="button" onclick="window.location.href='Catalog.aspx?q=' + document.getElementById('heroSearch').value" class="bg-primary text-white px-8 py-4 rounded-full text-sm font-bold hover:bg-primary/90 transition-all">
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i> Search
+                        </button>
+                    </div>
+                </div>
+
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a runat="server" href="~/Catalog.aspx" class="bg-white text-text-dark px-10 py-5 text-sm uppercase tracking-widest font-bold hover:bg-primary hover:text-white transition-all duration-500 inline-block text-center">Shop the Collection</a>
-                    <a runat="server" href="~/About.aspx" class="bg-transparent border border-white text-white px-10 py-5 text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-text-dark transition-all duration-500 inline-block text-center text-nowrap">Our Story</a>
+                    <a runat="server" href="~/Catalog.aspx" class="bg-primary text-white px-10 py-5 text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-primary transition-all duration-500 inline-block text-center rounded-sm">Explore All Gadgets</a>
+                    <a runat="server" href="~/Catalog.aspx?cat=1" class="bg-transparent border border-white text-white px-10 py-5 text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-text-dark transition-all duration-500 inline-block text-center text-nowrap rounded-sm">Latest Phones</a>
                 </div>
             </div>
         </div>
@@ -35,31 +46,31 @@
                 <div class="w-20 h-0.5 bg-primary mx-auto"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Living Room -->
-                <a href="Catalog.aspx?cat=living" class="group relative aspect-[4/5] overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Living Room" />
-                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500"></div>
-                    <div class="absolute bottom-10 left-10">
-                        <h3 class="text-white text-2xl font-serif">Living Room</h3>
-                        <span class="text-white/80 text-xs uppercase tracking-widest mt-2 block opacity-0 group-hover:opacity-100 transition-opacity duration-500">Explore Collection</span>
+                <!-- Smartphones -->
+                <a href="Catalog.aspx?cat=smartphones" class="group relative aspect-video overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Smartphones" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-colors duration-500"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-white text-2xl font-bold">Smartphones</h3>
+                        <span class="text-blue-400 text-xs uppercase tracking-widest mt-2 block opacity-0 group-hover:opacity-100 transition-opacity duration-500">Shop Phones</span>
                     </div>
                 </a>
-                <!-- Bedroom -->
-                <a href="Catalog.aspx?cat=bedroom" class="group relative aspect-[4/5] overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Bedroom" />
-                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500"></div>
-                    <div class="absolute bottom-10 left-10">
-                        <h3 class="text-white text-2xl font-serif">Bedroom</h3>
-                        <span class="text-white/80 text-xs uppercase tracking-widest mt-2 block opacity-0 group-hover:opacity-100 transition-opacity duration-500">Explore Collection</span>
+                <!-- Laptops -->
+                <a href="Catalog.aspx?cat=laptops" class="group relative aspect-video overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Laptops" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-colors duration-500"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-white text-2xl font-bold">Laptops</h3>
+                        <span class="text-blue-400 text-xs uppercase tracking-widest mt-2 block opacity-0 group-hover:opacity-100 transition-opacity duration-500">Shop Computing</span>
                     </div>
                 </a>
-                <!-- Dining Room -->
-                <a href="Catalog.aspx?cat=dining" class="group relative aspect-[4/5] overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1617806118233-f8e137ca2211?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Dining Room" />
-                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500"></div>
-                    <div class="absolute bottom-10 left-10">
-                        <h3 class="text-white text-2xl font-serif">Dining Room</h3>
-                        <span class="text-white/80 text-xs uppercase tracking-widest mt-2 block opacity-0 group-hover:opacity-100 transition-opacity duration-500">Explore Collection</span>
+                <!-- Audio -->
+                <a href="Catalog.aspx?cat=audio" class="group relative aspect-video overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Audio & Headphones" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-colors duration-500"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-white text-2xl font-bold">Audio & Audio</h3>
+                        <span class="text-blue-400 text-xs uppercase tracking-widest mt-2 block opacity-0 group-hover:opacity-100 transition-opacity duration-500">Shop Sound</span>
                     </div>
                 </a>
             </div>
@@ -92,27 +103,27 @@
                 </div>
                 <div class="lg:w-1/2">
                     <span class="text-primary text-xs uppercase tracking-widest font-bold mb-4 block">Our Story</span>
-                    <h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight text-nowrap">Crafting Comfort Since <span class="text-accent underline">2018</span></h2>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">Innovation at Your <span class="text-primary underline">Fingerprints</span></h2>
                     <p class="text-gray-500 text-lg mb-8 leading-relaxed">
-                        At Saja, we believe that your home should be a reflection of your soul. We collaborate with master artisans to create timeless furniture that blends modern aesthetics with enduring comfort.
+                        At eGadgetHub, we are passionate about technology. We source the most innovative electronics from around the globe to ensure you have access to the future, today.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
                         <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-off-white flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-feather-pointed text-primary"></i>
+                            <div class="w-12 h-12 bg-blue-50 flex items-center justify-center flex-shrink-0 rounded-lg">
+                                <i class="fa-solid fa-bolt-lightning text-primary"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-sm uppercase tracking-widest mb-2">Sustainable</h4>
-                                <p class="text-xs text-gray-400">Ethically sourced premium wood and fabrics.</p>
+                                <h4 class="font-bold text-sm uppercase tracking-widest mb-2">Fast Service</h4>
+                                <p class="text-xs text-gray-400">Same-day delivery on selected electronic items.</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-off-white flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-couch text-primary"></i>
+                            <div class="w-12 h-12 bg-blue-50 flex items-center justify-center flex-shrink-0 rounded-lg">
+                                <i class="fa-solid fa-shield-halved text-primary"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-sm uppercase tracking-widest mb-2">Custom Built</h4>
-                                <p class="text-xs text-gray-400">Handcrafted to your specific space requirements.</p>
+                                <h4 class="font-bold text-sm uppercase tracking-widest mb-2">Authentic</h4>
+                                <p class="text-xs text-gray-400">100% genuine products with manufacturer warranty.</p>
                             </div>
                         </div>
                     </div>

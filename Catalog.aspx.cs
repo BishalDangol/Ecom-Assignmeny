@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -31,9 +31,23 @@ namespace serena.Site
                 BindCategories();
 
                 // Read filters from querystring
-                int cat;
-                if (int.TryParse(Request.QueryString["cat"], out cat))
-                    SelectedCategoryId = cat;
+                int catId;
+                if (int.TryParse(Request.QueryString["cat"], out catId))
+                {
+                    SelectedCategoryId = catId;
+                }
+                else
+                {
+                    string catName = Request.QueryString["cat"];
+                    if (!string.IsNullOrEmpty(catName))
+                    {
+                        // Try to find category by name
+                        object idObj = Db.Scalar<object>("SELECT id FROM categories WHERE name LIKE @catName", 
+                            new SqlParameter("@catName", "%" + catName + "%"));
+                        if (idObj != null && idObj != DBNull.Value)
+                            SelectedCategoryId = Convert.ToInt32(idObj);
+                    }
+                }
 
                 var q = (Request.QueryString["q"] ?? "").Trim();
                 CurrentSearch = q;

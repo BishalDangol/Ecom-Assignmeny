@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
@@ -285,10 +285,21 @@ BEGIN
 END;
 ");
 
+            // v3: seed default admin admin/123456
+            var v3 = new StringBuilder();
+            v3.Append(@"
+IF NOT EXISTS (SELECT 1 FROM dbo.admins WHERE username = 'admin')
+BEGIN
+  INSERT INTO dbo.admins (full_name, username, [password], role)
+  VALUES ('Admin User', 'admin', '8D969EEF6ECAD3C29A3A629280E686CF0C3F5D5A86AFF3CA12020C923ADC6C92', 'superadmin');
+END;
+");
+
             return new[]
             {
                 new Migration { Version = 1, Name = "create_core_tables", Sql = sb.ToString() },
-                new Migration { Version = 2, Name = "add_esewa_payment", Sql = v2.ToString() }
+                new Migration { Version = 2, Name = "add_esewa_payment", Sql = v2.ToString() },
+                new Migration { Version = 3, Name = "seed_default_admin", Sql = v3.ToString() }
             };
         }
 

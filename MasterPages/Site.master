@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="serena.SiteMaster" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="serena.SiteMaster" %>
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -19,14 +19,14 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#8B7355',
-                        secondary: '#F5F5DC',
-                        accent: '#D4AF37',
-                        'text-dark': '#333333',
-                        'off-white': '#FAF9F6',
+                        primary: '#2563eb',
+                        secondary: '#f8fafc',
+                        accent: '#3b82f6',
+                        'text-dark': '#0f172a',
+                        'off-white': '#f1f5f9',
                     },
                     fontFamily: {
-                        serif: ['Playfair Display', 'serif'],
+                        serif: ['Outfit', 'sans-serif'],
                         sans: ['Inter', 'sans-serif'],
                     }
                 }
@@ -67,8 +67,8 @@
 
                     <!-- Center: Logo -->
                     <div class="flex-shrink-0">
-                        <a runat="server" href="~/Default.aspx" class="text-3xl font-serif tracking-tighter hover:opacity-80 transition-opacity">
-                            Saja
+                        <a runat="server" href="~/Default.aspx" class="text-3xl font-bold tracking-tighter hover:opacity-80 transition-opacity text-primary">
+                            eGadgetHub
                         </a>
                     </div>
 
@@ -124,11 +124,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                     <!-- Brand -->
                     <div>
-                        <a runat="server" href="~/Default.aspx" class="text-3xl font-serif tracking-tighter mb-6 block">
-                            Saja
+                        <a runat="server" href="~/Default.aspx" class="text-3xl font-bold tracking-tighter mb-6 block text-primary">
+                            eGadgetHub
                         </a>
                         <p class="text-gray-500 text-sm leading-relaxed mb-8">
-                            Curating timeless furniture pieces that blend modern aesthetics with enduring comfort for your sanctuary.
+                            Your premier destination for the latest electronic gadgets and cutting-edge technology. Experience innovation at your fingertips.
                         </p>
                         <div class="flex space-x-4">
                             <a href="#" class="w-10 h-10 border border-gray-200 flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition-all">
@@ -147,10 +147,10 @@
                     <div>
                         <h4 class="text-xs uppercase tracking-widest font-bold mb-8">Shop</h4>
                         <ul class="space-y-4 text-sm text-gray-500">
-                            <li><a runat="server" href="~/Catalog.aspx" class="hover:text-primary transition-colors">All Furniture</a></li>
-                            <li><a href="#" class="hover:text-primary transition-colors">Living Room</a></li>
-                            <li><a href="#" class="hover:text-primary transition-colors">Bedroom</a></li>
-                            <li><a href="#" class="hover:text-primary transition-colors">Dining Room</a></li>
+                            <li><a runat="server" href="~/Catalog.aspx" class="hover:text-primary transition-colors">All Gadgets</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Smartphones</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Laptops</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Accessories</a></li>
                         </ul>
                     </div>
 
@@ -177,7 +177,7 @@
                 </div>
 
                 <div class="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-xs text-gray-400 uppercase tracking-widest">
-                    <div>© <%= DateTime.Now.Year %> Saja Furniture Store. All rights reserved.</div>
+                    <div>© <%= DateTime.Now.Year %> eGadgetHub. All rights reserved.</div>
                     <div class="flex space-x-6">
                         <span>Shipping Info</span>
                         <span>Terms of Service</span>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Security.Cryptography;
@@ -51,10 +51,10 @@ namespace serena
             try
             {
                 // Admin
-                EnsureAdmin("Site Administrator", "admin", "P@ssw0rd!", "superadmin", sb);
+                EnsureAdmin("Site Administrator", "admin", "123456", "superadmin", sb);
 
                 // Categories
-                string[] cats = { "Postcards & Stationery", "Magnets", "T-Shirts & Apparel", "Mugs & Drinkware", "Keychains" };
+                string[] cats = { "Smartphones", "Laptops", "Audio & Headphones", "Cameras", "Smartwatches", "Accessories" };
                 foreach (var c in cats) EnsureCategory(c, sb);
 
                 // Payment Methods (must match CHECK constraint)
@@ -63,16 +63,16 @@ namespace serena
                 EnsurePayment("Bank", sb);
 
                 // Products (name, category, price, stock)
-                SeedProduct("Calligraphy Pen Set", "Postcards & Stationery", 19.00m, 14, sb);
-                SeedProduct("Ceramic Souvenir Magnet", "Magnets", 10.00m, 20, sb);
-                SeedProduct("City Landmark T-Shirt", "T-Shirts & Apparel", 45.00m, 29, sb);
-                SeedProduct("Classic Souvenir Mug", "Mugs & Drinkware", 20.00m, 39, sb);
-                SeedProduct("Custom Photo Mug", "Mugs & Drinkware", 30.00m, 24, sb);
-                SeedProduct("Funny Quote Magnet", "Magnets", 7.50m, 34, sb);
-                SeedProduct("Handmade Notebook", "Postcards & Stationery", 15.00m, 19, sb);
-                SeedProduct("Hoodie with Embroidery", "T-Shirts & Apparel", 90.00m, 14, sb);
-                SeedProduct("Mini Landmark Keychain", "Keychains", 10.00m, 30, sb);
-                SeedProduct("Personalized Name Keychain", "Keychains", 12.50m, 40, sb);
+                SeedProduct("iPhone 15 Pro", "Smartphones", 999.00m, 15, sb);
+                SeedProduct("MacBook Air M2", "Laptops", 1199.00m, 10, sb);
+                SeedProduct("Sony WH-1000XM5", "Audio & Headphones", 349.00m, 25, sb);
+                SeedProduct("Fujifilm X-T5", "Cameras", 1699.00m, 5, sb);
+                SeedProduct("Apple Watch Series 9", "Smartwatches", 399.00m, 20, sb);
+                SeedProduct("AirPods Pro (2nd Gen)", "Audio & Headphones", 249.00m, 30, sb);
+                SeedProduct("Logitech MX Master 3S", "Accessories", 99.00m, 50, sb);
+                SeedProduct("Dell XPS 13", "Laptops", 1099.00m, 12, sb);
+                SeedProduct("Samsung Galaxy S24 Ultra", "Smartphones", 1299.00m, 18, sb);
+                SeedProduct("DJI Mini 4 Pro", "Cameras", 759.00m, 8, sb);
 
                 Find<Literal>("litLog").Text = Server.HtmlEncode(sb.ToString());
                 Show(true, "Seed completed.");

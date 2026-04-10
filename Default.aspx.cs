@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -61,7 +61,7 @@ namespace serena.Site
             if (products == null || products.Count == 0)
                 return "<div class='bg-off-white p-8 text-center text-gray-400'>No products found.</div>";
 
-            sb.Append("<div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>");
+            sb.Append("<div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'>");
             foreach (var p in products)
             {
                 int id = p.Id;

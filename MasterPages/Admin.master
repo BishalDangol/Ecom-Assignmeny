@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="serena.AdminMaster" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="serena.AdminMaster" %>
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-50">
 <head runat="server">
@@ -19,15 +19,15 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#8B7355',
-                        secondary: '#F5F5DC',
-                        accent: '#D4AF37',
-                        'text-dark': '#333333',
-                        'off-white': '#FAF9F6',
-                        'admin-bg': '#1a1a1a',
+                        primary: '#2563eb',
+                        secondary: '#f8fafc',
+                        accent: '#3b82f6',
+                        'text-dark': '#0f172a',
+                        'off-white': '#f1f5f9',
+                        'admin-bg': '#0f172a',
                     },
                     fontFamily: {
-                        serif: ['Playfair Display', 'serif'],
+                        serif: ['Outfit', 'sans-serif'],
                         sans: ['Inter', 'sans-serif'],
                     }
                 }
@@ -50,8 +50,8 @@
         <div class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col shadow-2xl z-50">
             <div class="flex flex-col flex-grow bg-admin-bg pt-8 overflow-y-auto">
                 <div class="flex items-center flex-shrink-0 px-8 mb-12">
-                    <a runat="server" href="~/Admin/Dashboard.aspx" class="text-3xl font-serif text-white tracking-tighter">
-                        Saja<span class="text-primary">.</span>
+                    <a runat="server" href="~/Admin/Dashboard.aspx" class="text-2xl font-bold text-white tracking-tighter">
+                        eGadgetHub<span class="text-primary">.</span>
                     </a>
                 </div>
                 <nav class="flex-1 px-4 space-y-1">
@@ -128,7 +128,7 @@
 
             <!-- Copyright -->
             <footer class="py-6 px-8 text-center bg-white border-t border-gray-100 mt-auto">
-                <p class="text-[10px] uppercase tracking-widest text-gray-300 font-bold">&copy; 2024 Saja Furniture Studio. Admin Access Only.</p>
+                <p class="text-[10px] uppercase tracking-widest text-gray-300 font-bold">&copy; <%= DateTime.Now.Year %> eGadgetHub Electronics. Admin Access Only.</p>
             </footer>
         </div>
     </form>
